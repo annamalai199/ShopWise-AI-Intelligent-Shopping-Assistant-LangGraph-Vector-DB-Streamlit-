@@ -1,0 +1,48 @@
+# ShopWise AI - Production Dependencies
+# ======================================
+
+# Core Framework
+streamlit==1.40.1
+
+# AI & LLM
+langchain==0.3.12
+langchain-core==0.3.21
+langchain-groq==0.2.1
+langchain-community==0.3.12
+langgraph==0.2.53
+
+# Semantic Search
+sentence-transformers==3.3.1
+numpy==1.26.4
+
+# Authentication
+bcrypt==4.2.1
+
+# Environment Management
+python-dotenv==1.0.1
+
+# Database (included with Python)
+# sqlite3 - Standard library
+
+# Optional Development Dependencies
+# ==================================
+# Uncomment below for development work
+
+# Testing
+# pytest>=8.0.0
+# pytest-cov>=4.1.0
+# pytest-asyncio>=0.23.0
+
+# Code Quality
+# black>=24.0.0
+# flake8>=7.0.0
+# mypy>=1.8.0
+# pylint>=3.0.0
+
+# Documentation
+# sphinx>=7.2.0
+# sphinx-rtd-theme>=2.0.0
+
+# Deployment
+# gunicorn>=21.2.0
+# uvicorn>=0.27.0

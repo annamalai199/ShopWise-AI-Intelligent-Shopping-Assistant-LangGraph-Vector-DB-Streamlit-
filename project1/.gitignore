@@ -1,0 +1,99 @@
+# ShopWise AI - Git Ignore Configuration
+# ========================================
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Database Files (keep store.db in repo for demo/deployment)
+# Uncomment below to ignore database files in production
+# *.db
+# *.sqlite
+# *.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Streamlit
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# Logs
+*.log
+logs/
+*.out
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Temporary Files
+*.tmp
+*.temp
+tmp/
+temp/
+*_backup.py
+*_old_backup.py
+
+# OS Files
+Thumbs.db
+.DS_Store
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Documentation (keep only README.md)
+docs/_build/
+site/
+*_GUIDE.md
+*_SUMMARY.txt
+QUICKSTART.md
+START_HERE.md
+LAUNCH_GUIDE.md
+UI_*.md
+LUXURY_*.md
+RUN_*.md
+UPGRADE_*.md
+UPGRADE_*.txt
+test_*.py

@@ -1,0 +1,140 @@
+# AgenticAI - Git Ignore Configuration
+# =====================================
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.py[oc]
+*.so
+.Python
+build/
+dist/
+wheels/
+*.egg-info/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+develop-eggs/
+downloads/
+eggs/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+.jupyter/
+
+# Database Files (uncomment to ignore databases in production)
+# *.db
+# *.sqlite
+# *.sqlite3
+
+# Logs
+*.log
+logs/
+*.out
+*.err
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+*.cover
+.hypothesis/
+
+# Temporary Files
+*.tmp
+*.temp
+tmp/
+temp/
+*_backup.py
+*_old_backup.py
+*.bak
+
+# Documentation (keep only essential README.md files)
+docs/_build/
+site/
+*_GUIDE.md
+*_SUMMARY.txt
+*_SUMMARY.md
+QUICKSTART.md
+START_HERE.md
+LAUNCH_GUIDE.md
+UI_*.md
+LUXURY_*.md
+RUN_*.md
+UPGRADE_*.md
+UPGRADE_*.txt
+test_*.py
+
+# Cache directories
+.cache/
+.ruff_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Package managers
+pip-log.txt
+pip-delete-this-directory.txt
+.Python
+uv.lock
+
+# Streamlit
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# AI/ML Models (optional - uncomment if you don't want to track large models)
+# *.h5
+# *.pkl
+# *.pth
+# *.pt
+# *.onnx
+# *.pb
+
+# Vector DB (optional - uncomment to ignore)
+# chroma/
+# faiss/
+# *.index
+
+# Keep these files
+!.gitignore
+!requirements.txt
+!README.md
