@@ -355,21 +355,10 @@ def create_database():
         print(f"   • Average Rating: {avg_rating:.2f}/5.0")
         print()
         
-        # Build vector embeddings if enabled
-        print("🔄 Building vector embeddings...")
-        try:
-            import config
-            if config.ENABLE_VECTOR_SEARCH:
-                import vector_search
-                embedded = vector_search.build_product_embeddings(verbose=True)
-                print(f"   ✓ Generated {embedded} product embeddings")
-            else:
-                print("   ⚠ Vector search disabled in config")
-        except ImportError as e:
-            print(f"   ⚠ Could not build embeddings: {e}")
-            print("   ℹ Install with: pip install sentence-transformers")
-        except Exception as e:
-            print(f"   ⚠ Error building embeddings: {e}")
+        # Embeddings are intentionally NOT built here.
+        # They will be generated lazily on first semantic search in app.py.
+        print("   ✓ Database created")
+        print("   ℹ Embeddings will be generated on first semantic search")
         print()
         
         print("🚀 You can now run the application with: streamlit run app.py")

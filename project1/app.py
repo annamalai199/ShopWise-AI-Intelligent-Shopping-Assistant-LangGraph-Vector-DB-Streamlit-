@@ -53,18 +53,7 @@ def initialize_database():
                 # Import and run setup
                 import setup_db
                 setup_db.create_database()  # ✅ Correct function name
-                
-                # Build embeddings if vector search is enabled
-                from config import ENABLE_VECTOR_SEARCH
-                if ENABLE_VECTOR_SEARCH:
-                    try:
-                        import vector_search
-                        vector_search.build_product_embeddings(verbose=False)
-                        st.success("✅ Database initialized successfully!")
-                    except Exception as e:
-                        st.warning(f"⚠️ Database created but embeddings failed: {e}")
-                else:
-                    st.success("✅ Database initialized successfully!")
+                st.success("✅ Database initialized successfully!")
             except Exception as e:
                 st.error(f"❌ Database initialization failed: {e}")
                 st.stop()
@@ -444,6 +433,62 @@ hr {
 }
 </style>
 """, unsafe_allow_html=True)
+
+# ==============================================================================
+# Lazy Embedding Initializer
+# ==============================================================================
+
+def _ensure_embeddings_ready() -> bool:
+    """
+    Lazily build product embeddings the first time semantic search is needed.
+    
+    Checks whether the product_embeddings table is populated. If it is empty
+    and ENABLE_VECTOR_SEARCH is True, triggers a one-time build. The result
+    is cached in st.session_state so the check only queries SQLite once per
+    browser session.
+    
+    Returns:
+        bool: True if embeddings are available (or were just built), False otherwise.
+    """
+    # Return immediately if already confirmed ready this session
+    if st.session_state.get("_embeddings_ready"):
+        return True
+    
+    # Return immediately if vector search is disabled in config
+    from config import ENABLE_VECTOR_SEARCH
+    if not ENABLE_VECTOR_SEARCH:
+        return False
+    
+    import sqlite3 as _sqlite3
+    import os as _os
+    
+    db_path = _os.path.join(_os.path.dirname(__file__), "store.db")
+    
+    try:
+        conn = _sqlite3.connect(db_path)
+        cur = conn.cursor()
+        cur.execute("SELECT COUNT(*) FROM product_embeddings")
+        count = cur.fetchone()[0]
+        conn.close()
+    except Exception:
+        # Table might not exist yet — treat as empty
+        count = 0
+    
+    if count == 0:
+        # Build embeddings now, showing a one-time spinner to the user
+        try:
+            import vector_search
+            with st.spinner("⚡ First run: building semantic search index (30–60 s)…"):
+                vector_search.build_product_embeddings(verbose=False)
+            st.session_state["_embeddings_ready"] = True
+            return True
+        except Exception as e:
+            # Non-fatal: fall back gracefully; keyword search still works
+            st.warning(f"Semantic search unavailable: {e}")
+            return False
+    else:
+        st.session_state["_embeddings_ready"] = True
+        return True
 
 # ==============================================================================
 # Session State Initialization
@@ -922,6 +967,9 @@ def main() -> None:
         st.session_state.messages.append({"role": "assistant", "content": response})
         del st.session_state.pending_image
         st.rerun()
+    
+    # Ensure embeddings exist before any semantic search might be triggered
+    _ensure_embeddings_ready()
     
     # Chat input
     if prompt := st.chat_input(
