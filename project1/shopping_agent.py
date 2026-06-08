@@ -62,14 +62,8 @@ DB_PATH = os.path.join(os.path.dirname(__file__), "store.db")
 
 # LLM Configuration - Support both local .env and Streamlit Cloud secrets
 def get_api_key() -> str:
-    """Get GROQ API key from Streamlit secrets or environment."""
-    try:
-        import streamlit as st
-        if hasattr(st, 'secrets') and 'GROQ_API_KEY' in st.secrets:
-            return st.secrets['GROQ_API_KEY']
-    except (ImportError, FileNotFoundError):
-        pass
-    return os.environ.get('GROQ_API_KEY', '')
+    """Get GROQ API key from environment variables."""
+    return os.environ.get("GROQ_API_KEY", "")
 
 api_key = get_api_key()
 
