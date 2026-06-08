@@ -58,8 +58,6 @@ def initialize_database():
                 st.error(f"❌ Database initialization failed: {e}")
                 st.stop()
 
-# Run database initialization before anything else
-initialize_database()
 
 # ==============================================================================
 # Application Configuration
@@ -76,6 +74,9 @@ st.set_page_config(
         'About': "ShopWise AI - Your intelligent shopping companion powered by advanced AI"
     }
 )
+
+# Run database initialization before anything else
+initialize_database()
 
 # ==============================================================================
 # Custom CSS Styling
