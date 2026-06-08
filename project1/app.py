@@ -10,23 +10,6 @@ from typing import Optional
 
 import streamlit as st
 
-# ==============================================================================
-# Application Configuration
-# ==============================================================================
-
-st.set_page_config(
-    page_title="ShopWise AI | Intelligent Shopping Assistant",
-    page_icon="🛍️",
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={
-        'Get Help': 'https://github.com/your-org/shopwise',
-        'Report a bug': "https://github.com/your-org/shopwise/issues",
-        'About': "ShopWise AI - Your intelligent shopping companion powered by advanced AI"
-    }
-)
-
-
 from shopping_agent import agent, set_user_context
 from auth_ui import render_auth_page, render_profile_modal, render_password_modal, render_orders_modal
 from auth_manager import AuthManager
@@ -75,11 +58,24 @@ def initialize_database():
                 st.error(f"❌ Database initialization failed: {e}")
                 st.stop()
 
-
-
-
 # Run database initialization before anything else
 initialize_database()
+
+# ==============================================================================
+# Application Configuration
+# ==============================================================================
+
+st.set_page_config(
+    page_title="ShopWise AI | Intelligent Shopping Assistant",
+    page_icon="🛍️",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': 'https://github.com/your-org/shopwise',
+        'Report a bug': "https://github.com/your-org/shopwise/issues",
+        'About': "ShopWise AI - Your intelligent shopping companion powered by advanced AI"
+    }
+)
 
 # ==============================================================================
 # Custom CSS Styling
