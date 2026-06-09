@@ -94,41 +94,34 @@ def render_auth_page() -> Optional[Dict[str, Any]]:
 
     /* Auth page layout */
     .block-container {
-      padding: 0 !important;
-      max-width: 100% !important;
+      padding: 2rem 3rem !important;
+      max-width: 1000px !important;
       min-height: 100vh !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
     }
     section.main > div {
       background: transparent !important;
       min-height: 100vh !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
     }
     .element-container { margin: 0 !important; width: 100%; }
 
     .auth-container {
-      max-width: 460px;
       width: 100%;
-      margin: auto !important;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 2.5rem;
-      box-shadow: var(--shadow-md);
+      margin: 0 !important;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
     }
 
     .auth-logo {
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
-    .auth-logo .icon { font-size: 2.8rem; display: block; margin-bottom: 0.75rem; }
+    .auth-logo .icon { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
     .auth-logo .wordmark {
       font-family: var(--font-display);
-      font-size: 2rem;
+      font-size: 1.875rem;
       color: var(--text-primary);
       letter-spacing: -0.02em;
       display: block;
@@ -138,7 +131,7 @@ def render_auth_page() -> Optional[Dict[str, Any]]:
       font-size: 0.875rem;
       color: var(--text-secondary);
       display: block;
-      margin-top: 0.5rem;
+      margin-top: 0.375rem;
       font-weight: 400;
     }
 
@@ -147,7 +140,6 @@ def render_auth_page() -> Optional[Dict[str, Any]]:
       background: transparent !important;
       border-bottom: 1px solid var(--border);
       gap: 0 !important;
-      justify-content: center !important;
     }
     .stTabs [data-baseweb="tab"] {
       background: transparent !important;
@@ -156,12 +148,10 @@ def render_auth_page() -> Optional[Dict[str, Any]]:
       font-size: 0.9rem !important;
       font-weight: 500 !important;
       color: var(--text-muted) !important;
-      padding: 0.85rem 1.6rem !important;
+      padding: 0.85rem 2rem !important;
       border-bottom: 2px solid transparent;
       margin-bottom: -1px;
       transition: all 0.15s ease;
-      flex: 1 !important;
-      text-align: center !important;
     }
     .stTabs [aria-selected="true"] {
       color: var(--accent) !important;
@@ -169,8 +159,10 @@ def render_auth_page() -> Optional[Dict[str, Any]]:
     }
     .stTabs [data-baseweb="tab-panel"] {
       background: var(--bg-card) !important;
-      border: none !important;
-      padding: 2rem 0 !important;
+      border: 1px solid var(--border) !important;
+      border-top: none !important;
+      border-radius: 0 0 var(--r-md) var(--r-md) !important;
+      padding: 2rem !important;
     }
 
     /* Inputs */
@@ -250,7 +242,7 @@ def render_auth_page() -> Optional[Dict[str, Any]]:
     </style>
     """, unsafe_allow_html=True)
     
-    # Container with no columns - centered card
+    # Container - full width layout
     st.markdown('<div class="auth-container">', unsafe_allow_html=True)
     
     # Header
@@ -276,7 +268,7 @@ def render_auth_page() -> Optional[Dict[str, Any]]:
             password = st.text_input("🔒 Password", type="password", placeholder="Enter your password")
             remember_me = st.checkbox("Remember me for 30 days")
             
-            col1, col2 = st.columns([3, 2])
+            col1, col2 = st.columns(2)
             with col1:
                 submit = st.form_submit_button("🔑 Sign In", use_container_width=True, type="primary")
             with col2:
