@@ -78,12 +78,14 @@ st.set_page_config(
 )
 
 # ==============================================================================
-# Custom CSS Styling
+# Custom CSS Styling (Only for Authenticated State)
 # ==============================================================================
 
-st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+def apply_main_app_css():
+    """Apply CSS styling for the main authenticated app (not auth page)."""
+    st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
 :root {
   --bg: #ffffff;
@@ -432,7 +434,7 @@ hr {
   .block-container { padding: 1.5rem 1rem 5rem !important; }
 }
 </style>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 # ==============================================================================
 # Lazy Embedding Initializer
@@ -857,6 +859,7 @@ def main() -> None:
         
         # If not authenticated and not guest, show auth page
         if not st.session_state.authenticated:
+            # Don't apply main app CSS, let auth page handle its own styling
             result = render_auth_page()
             
             if result:
@@ -890,8 +893,11 @@ def main() -> None:
             }
     
     # ==========================================================================
-    # Main Application UI
+    # Main Application UI (Only reached if authenticated)
     # ==========================================================================
+    
+    # Apply main app CSS only when authenticated
+    apply_main_app_css()
     
     # Render user header
     render_user_header()
